@@ -8,7 +8,7 @@ services:
       POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_DB: ${DB_NAME}
     ports:
-      - "5432:5432"
+      - "17702:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
@@ -34,8 +34,8 @@ services:
       MINIO_ROOT_PASSWORD: ${MINIO_SECRET_KEY}
     command: server /data --console-address :9001
     ports:
-      - "9000:9000"  # API port
-      - "9001:9001"  # WebUI port
+      - "17700:9000"  # API port
+      - "17701:9001"  # WebUI port
     volumes:
       - minio_data:/data
 
@@ -45,7 +45,7 @@ services:
       #dockerfile: server/Dockerfile
     image: getmaxun/maxun-backend:v0.0.2
     ports:
-      - "8080:8080"
+      - "17080:8080"
     env_file: .env
     environment:
       # to ensure Playwright works in Docker
@@ -74,7 +74,7 @@ services:
       #dockerfile: Dockerfile
     image: getmaxun/maxun-frontend:v0.0.1
     ports:
-      - "5173:5173"
+      - "15173:5173"
     env_file: .env
     volumes:
       - ./:/app             # Mount entire frontend app directory for hot reloading
